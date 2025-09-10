@@ -4,3 +4,7 @@
 # -iname makes case insensitive checks
 # -exec to "ls -l" the file: showing file size, file date and path
 find /media/jeff -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.tif' -o -iname '*.tiff' -o -iname '*.gif' -o -iname '*.bmp' -o -iname '*.svg' -o -iname '*.webp' -o -iname '*.heif' -o -iname '*.heic' \) -exec ls -l {} \; > ~/HD_image_files.txt
+# The find command will list the full path
+# We can get the file size with: du -b {} | awk '{print $1}'
+#   or: wc --bytes < {}
+# We can get the md5sum with: md5sum {}
