@@ -2,9 +2,9 @@
 # Use the find command to find image files by name
 # -type f checks files only (ignores directories and links)
 # -iname makes case insensitive checks
-# -exec to "ls -l" the file: showing file size, file date and path
-find /media/jeff -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.tif' -o -iname '*.tiff' -o -iname '*.gif' -o -iname '*.bmp' -o -iname '*.svg' -o -iname '*.webp' -o -iname '*.heif' -o -iname '*.heic' \) -exec ls -l {} \; > ~/HD_image_files.txt
+# Use -o (or) to list all possible image types
+# Easier to write a separate (perl) script to process file data: we will just list the files
+find /media/jeff/New\ Volume/ -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.tif' -o -iname '*.tiff' -o -iname '*.gif' -o -iname '*.bmp' -o -iname '*.svg' -o -iname '*.webp' -o -iname '*.heif' -o -iname '*.heic' \) > ~/HD_image_files.txt
 # The find command will list the full path
-# We can get the file size with: du -b {} | awk '{print $1}'
-#   or: wc --bytes < {}
-# We can get the md5sum with: md5sum {}
+# All files found will be piped to a text file that can be processed by a different script
+
