@@ -27,7 +27,11 @@ while ($fileline = <LIST>) {
         push (@filesize, -s $fileline); #Column three is the file size
         push (@mtime, ctime(stat($fileline)->mtime)); #Column four is the last modified time
         # The following lines will obtain the md5sum of the file
-        push (@md5sum, md5_hex($fileline)) ; # Column five is the md5sum
+        open (my $fh, '<', $fileline) or die "Can't open $fileline: $!\n";
+        binmode($fh);
+        $md5 = Digest::MD5->new->addfile($fh)->hexdigest;
+        close($fh);
+        push (@md5sum, $md5) ; # Column five is the md5sum
         #print {OUT} "$path,$filename,$filesize,$mtime,$md5sum\n"
     }
 }
